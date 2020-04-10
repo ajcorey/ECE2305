@@ -18,16 +18,24 @@ void setup() {
   Serial.println("The device started, now you can pair it with bluetooth!");
 }
 
- String string1 = "i should be able to type as much as i want in here. "; 
- String string2 = "how about i throw in a newline character because why not. \n hopefully its a new line \n";
- String string = string1 + string2;
+ String title = "&title:40 Steps\n"; 
+ String history = "&history:heres history about 40 steps...";
+ String string = title + history;
  bool sendBT = true;
 
 void loop() {
   if (SerialBT.hasClient() && sendBT) {
-    for(long int letter = 0; letter < string.length();letter++){
-      Serial.write(string[letter]);
-      SerialBT.write(string[letter]);
+    //title
+    for(long int letter = 0; letter < title.length();letter++){
+      Serial.write(title[letter]);
+      SerialBT.write(title[letter]);
+    }
+    
+     
+    //history
+    for(long int letter = 0; letter < history.length();letter++){
+      Serial.write(history[letter]);
+      SerialBT.write(history[letter]);
     }
     sendBT = false;
   }
@@ -38,7 +46,6 @@ void loop() {
       Serial.write(readIn);
     }
     
-//    sendBT = true;
   }
 
   if(!SerialBT.hasClient()){
